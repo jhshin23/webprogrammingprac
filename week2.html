@@ -7,72 +7,125 @@
         </title>
     </head>
     <body>
-        <h1>Web Programming</h1>
-        <ul>
-            <li><a href="#w1">Week 1</a></li>
-            <li><a href="#w2">Week 2</a></li>
-            <li><a href="#w3">Week 3</a></li>
-        </ul>
-        <hr><hr>
-        <b>웹에 관하여</b><br>
-        <!--소제목에 삼각형 추가-->
-        웹의 기본 목적<br>
-        웹의 기본 목적은 다른 컴퓨터에서 쉽게 볼 수 있게 하는 것이다.<br>
-        왜 Why?<br>
-        전 세계의 컴퓨터들을 인터넷으로 연결한 시스템을 WWW, 즉 웹이라고 부른다.<br>
-
-<!--표 작성-->
-<hr>
-<h3 id="w1">Week 1</h3>
-<ul>
-    <li><a href="w1-1">강의 개요</a></li>
-    <li><a href="w1-2">웹의 개념과 역사</a></li>
-    <li><a href="w1-3">Visual Studio Code</a>
-        <ol type="1">
-            <li>설치</li>
-            <li>유용한 plug-ins
-                <ul type="square">
-                    <li>Material Theme</li>
-                    <li>Prettier</li>
-                    <li>indent-rainbow</li>
-                    <li>Auto Rename Tag</li>
-                    <li>HTML CSS Surpport</li>
-                    <li>Live Server</li>
-                </ul>
-            </li>
-            <li>EMMET</li>
-        </ol>
-    </li>
-</ul>
-<hr>
-<h3 id="w2">Week 2:HTML Review</h3>
-<b>Input Types</b><br>
-<br>
-<u>Check box</u><br>
-<br>
-<form>
-    <input type="checkbox">HTML5
-    <input type="checkbox">CSS3
-    <input type="checkbox">Javascript
-</form>
-<br>
-<u>Radio Button</u><br>
-<br>
-<form>
-    <input type="radio" name="radio button">HTML 5<br>
-    <input type="radio" name="radio button">CSS3<br>
-    <input type="radio" name="radio button">JavaScript<br>
-</form>
-<br>
-<u>Combo Box</u><br>
-<br>
-<form>
-    <select name="combo box">
-        <option>HTML5</option>
-        <option>HTML5</option>
-        <option>HTML5</option>
-    </select>
-</form>
-<br>
-<hr>
-<h3 id="w3">Week 3:CSS Review</h3>
+        <header>
+            <h1>Web Programming</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="#w1">Week 1</a></li>
+                <li><a href="#w2">Week 2</a></li>
+                <li><a href="#w3">Week 3</a></li>
+            </ul>
+        </nav>
+    <hr><hr>
+        <main>
+            <section id="웹에 관하여">
+                <b>웹에 관하여</b><br>
+                <br>
+                <details>
+                    <summary>웹의 기본 목적</summary>
+                    웹의 기본 목적은 한 컴퓨터에서 만든 문서를 다른 컴퓨터에서 쉽게 볼 수 있게 하는 것이다.<br>
+                </details>
+                <details>
+                    <summary>왜 Why?</summary>
+                    전 세계의 컴퓨터들을 인터넷으로 연결한 시스템을 WWW, 즉 웹이라고 부른다.<br>    
+                </details>
+            </section>
+            <br>
+            <br>
+            <section id="표">
+                <table border="1">
+                    <caption><b>Weekly Schedule</b></caption>
+                    <thead>
+                        <tr><th>Week</th><th>Date</th><th>Contents</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>Sept. 2</td><td><ul><li>강의 개요</li><li>웹의 개념과 구조</li><li>Visual Studio Code</li></ul></td></tr>
+                        <tr><td>2</td><td>Sept. 9</td><td>HTML Review</td></tr>
+                        <tr><td>3</td><td>Sept. 16</td><td>CSS Review</td></tr>
+                    </tbody>
+                </table>
+            </section>
+            <hr>
+            <section id="weeks">
+                <ol type="1"><!--ol안의 각 항목을 section으로 나눠도 되나요?-->
+                    <li>
+                        <h3 id="w1">Week 1</h3>
+                        <ul>
+                            <li><a href="https://learn.hansung.ac.kr/mod/ubfile/view.php?id=893651">강의 개요</a></li>
+                            <li><a href="https://learn.hansung.ac.kr/mod/ubfile/view.php?id=893697">웹의 개념과 구조</a></li>
+                            <li><a href="https://learn.hansung.ac.kr/mod/ubfile/view.php?id=893698">Visual Studio Code</a>
+                                <ol type="1">
+                                    <li>설치</li>
+                                    <li>유용한 plug-ins
+                                        <ul type="square">
+                                            <li>Material Theme</li>
+                                            <li>Prettier</li>
+                                            <li>indent-rainbow</li>
+                                            <li>Auto Rename Tag</li>
+                                            <li>HTML CSS Surpport</li>
+                                            <li>Live Server</li>
+                                        </ul>
+                                    </li>
+                                    <li>EMMET</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </li>
+                <hr>
+                    <li>
+                        <h3 id="w2">Week 2: HTML Review</h3>
+                        <b>Input Types</b><br>
+                        <br>
+                        <u>Check Box</u><br>
+                            <br>
+                            <form>
+                                <label>
+                                    <input type="checkbox">HTML5
+                                </label>
+                                <label>
+                                    <input type="checkbox">CSS3
+                                </label>
+                                <label>
+                                    <input type="checkbox">JavaScript
+                                </label>
+                            </form>
+                            <br>
+                        <u>Radio Button</u><br>
+                            <br>
+                            <form>
+                                <label>
+                                    <input type="radio" name="radio button">HTML5<br>
+                                </label>
+                                <label>
+                                    <input type="radio" name="radio button">CSS3<br>
+                                </label>
+                                <label>
+                                    <input type="radio" name="radio button">JavaScript<br>
+                                </label>
+                            </form>
+                            <br>
+                        <u>Combo Box</u><br>
+                            <br>
+                            <form>
+                                <select name="combo box">
+                                    <option>HTML5</option>
+                                    <option>CSS3</option>
+                                    <option>JavaScript</option>
+                                </select>
+                            </form>
+                            <br>
+                    </li>
+                <hr>
+                    <li>
+                        <h3 id="w3">Week 3: CSS Review</h3>
+                    </li>
+                </ol>
+            </section>
+        </main>
+    <hr>
+        <footer>
+            <p>Copyright © 2024 by Sung-Dong All Rights Reserved</p>
+        </footer>
+    </body>
+</html>
