@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table { border : 1px solid lightgrey; border-collapse: collapse; table-layout: fixed; }
+        td { background-color: lightgray;border : 2px solid lightgrey; width: 26px; height: 20px; table-layout: fixed; }
+        #colorSelect { border: 2px solid; border-color: lightblue; width: 33px; height: 18px; }
+        #selectedColor { width: 60px; height: 60px }
+        #mplocaTD { background-color: white; }
+        #widthLineTD1 { background-color: white; }
+        #widthLineTD2 { background-color: white; }
+        td.emptyPal { background-color: white; }
+        textarea { border: 0px; resize: none; background-color: white; }
+    </style>
+    <title>그림판 만들기</title>
+</head>
+<body onload="init()">
+    <h3>그림판입니다. 그림을 그려보세요</h3>
+    <hr>
+    <table>
+        <tr>
+            <td class="pal"></td>
+            <td class="pal"></td>
+            <td class="pal"></td>
+            <td class="pal"></td>
+            <td class="pal"></td>
+            <td class="pal"></td>
+            <td class="pal"></td>
+            <td class="pal"></td>
+
+            <td colspan="2" id="colorSelectTD">
+                <input type="color" id="colorSelect" value="Black" >
+            </td>
+
+            <td id="widthLineTD2">
+                선굵기
+            </td>
+
+            <td id="selectedColor" rowspan="2"></td>
+
+            <td rowspan="2" id="mplocaTD">
+                <textarea name="mploca" id="mploca" cols="15" rows="2" ></textarea>
+            </td>
+        </tr>
+
+        <tr>        
+            <td class="pal"></td>
+            <td class="pal"></td>
+            <td class="pal"></td>
+            <td class="pal"></td>
+            <td class="pal"></td>
+            <td class="pal"></td>
+            <td class="pal"></td>
+            <td class="pal"></td> 
+
+            <td class="emptyPal"></td>
+            <td class="emptyPal"></td>
+
+            <td id="widthLineTD1">
+                <input type="text" id="widthLine" value="1" size="5">
+            </td>
+        </tr>
+    </table>
+
+<canvas id="myCanvas" style="background-color:aliceblue" width="565" height="56">
+</canvas>
+
+
+<script>
+let canvas, context;
+
+//색상 목록 만들기, td 팔레트 목록 만들기, td 배경색 속성에 색상 대입하기, 이벤트 리스너 달기
+let colorName16 = "brown red orange yellow olive purple violet white yellowgreen green darkblue lightblue teal black darkgray gray "
+let c = colorName16.split(" ");
+let arrPal = Array.from(document.getElementsByClassName("pal"));  //
+arrPal.forEach((pal, index) => {
+        pal.style.backgroundColor = c[index];
+        pal.addEventListener("click", addClickEvent);
+    });
+//펜 색상 변경, 펜 색상 표시칸 이벤트 함수
+function addClickEvent (e) {
+    context.strokeStyle=e.target.style.backgroundColor;  //16개 색을 나타낸 td 중에 클릭한 td 색으로 바꿈
+    document.getElementById("selectedColor").style.backgroundColor=context.strokeStyle;  //펜 색상 표시칸도 바꿈
+}
+function addchangeEvent (e) {
+    context.strokeStyle=document.getElementById("colorSelect").value;  //input type color에서 펜 색 바꾸기
+    document.getElementById("selectedColor").style.backgroundColor=document.getElementById("colorSelect").value;  //펜 색상 표시칸도 바꿈
+}
+document.getElementById("colorSelect").addEventListener("change", addchangeEvent);  //input type color에 이벤트 리스너 달기
+
+//펜 두께 변경 이벤트 리스너, 익명 함수
+document.getElementById("widthLine").addEventListener("change", function (e){context.lineWidth=this.value});  
+
+function init() {
+	canvas = document.getElementById("myCanvas");
+	context = canvas.getContext("2d");
+	
+	// 마우스 리스너 등록. e는 MouseEvent 객체
+	canvas.addEventListener("mousemove", function (e) { move1(e) }, false);
+	canvas.addEventListener("mousedown", function (e) { down(e) }, false);
+	canvas.addEventListener("mouseup", function (e) { up(e) }, false);
+	canvas.addEventListener("mouseout", function (e) { out(e) }, false);
+
+    // 마우스포인터가 캔버스 안에 있을 때 id=mploca 객체에 마우스포인터 x, y 좌표 표시 
+	canvas.addEventListener("mousemove", function (e) { mousePointerLoca(e) }, false);
+     // 마우스포인터가 캔버스 밖에 있을 때 id=mploca 객체 비우기 
+    canvas.addEventListener("mouseout", function (e) { mousePointerOut(e) }, false);
+
+}
+
+let startX=0, startY=0; // 마우스의 마지막 포인터 좌표
+let drawing=false;
+function draw(curX, curY) { 
+	context.beginPath();
+	context.moveTo(startX, startY);
+	context.lineTo(curX, curY);
+	context.stroke();
+}
+function down(e) { 
+	startX = e.offsetX; startY = e.offsetY;
+	drawing = true;
+}
+function up(e) { drawing = false; }
+function move1(e) {
+	if(!drawing) return; // 마우스가 눌러지지 않았으면 리턴
+	let curX = e.offsetX, curY = e.offsetY;
+	draw(curX, curY);	
+	startX = curX; startY = curY;
+    document.getElementById("mploca").innerHTML = `\tx=${e.offsetX}\n\ty=${e.offsetY}`;
+}
+function mousePointerLoca(e) {  // 마우스포인터가 캔버스 안에 있을 때 id=mploca 객체에 마우스포인터 x, y 좌표 표시 
+    let curX = e.offsetX, curY = e.offsetY;
+	startX = curX; startY = curY;
+    document.getElementById("mploca").innerHTML = `\tx=${e.offsetX}\n\ty=${e.offsetY}`;
+}
+function mousePointerOut(e) {  // 마우스포인터가 캔버스 밖에 있을 때 id=mploca 객체 비우기 
+    document.getElementById("mploca").innerHTML = ` `;
+}
+
+function out(e) { drawing = false; }
+</script>
+</body>
+</html>
